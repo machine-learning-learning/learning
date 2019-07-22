@@ -1,0 +1,42 @@
+import numpy as np
+from scipy import linalg
+import polyreg
+
+
+class RidgeRegression:
+    def __init__(self, lambda_=1.):
+        self.lambda_ = lambda_
+        self.w_ = None
+
+    def fit(self, X, t):
+        Xtil = np.c_[np.ones(X.shape[0]), X]
+        c = np.eye(Xtil.shape[1])
+        A = np.dot(Xtil.T, Xtil) + self.lambda_ * c
+        b = np.dot(Xtil.T, t)
+        self.w_ = linalg.solve(A, b)
+
+    def predict(self, X):
+        Xtil = np.c_[np.ones(X.shape[0]), X]
+        return np.dot(Xtil, self.w_)
+
+class RidgeRegressionP:
+    def __init__(self, lambda_=1.):
+        self.lambda_ = lambda_
+        self.w_ = None
+
+    def fit(self, X, t):
+        Xtil = np.c_[np.ones(X.shape[0]), X]
+        c = np.eye(Xtil.shape[1])
+        A = np.dot(Xtil.T, Xtil) + self.lambda_ * c
+        b = np.dot(Xtil.T, t)
+        polreg = polyreg.PolynomialRegression(10)
+        polreg.fit(A, b)
+        print(type(polreg))
+        print(type(polreg.w_))
+        print(type(self.w_))
+        self.w_ = polreg.w_
+		
+    def predict(self, X):
+        Xtil = np.c_[np.ones(X.shape[0]), X]
+        return np.dot(Xtil, self.w_)
+
