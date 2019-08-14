@@ -12,12 +12,14 @@ pprint(word_lists[:3], compact = True)
 
 #単語辞書を定義する
 dictionary = gensim.corpora.Dictionary(word_lists)
+#データをフィルターにかける、単語の出現が1文書以下のとき、単語が60%以上の文書に登場したときは除外
 dictionary.filter_extremes(no_below = 1, no_above = 0.6)
 
 for key in dictionary.keys()[30:60]:
     print(key, dictionary[key])
 print()
 
+#文書をベクトル化する
 corpus = [dictionary.doc2bow(word_list) for word_list in word_lists]
 
 for l in corpus[:3]:
@@ -25,6 +27,7 @@ for l in corpus[:3]:
         print(dictionary[t[0]], t[1])
     print()
 
+#LDAのモデルに投入する
 lda = gensim.models.LdaModel(corpus = corpus, id2word = dictionary, num_topics = 10)
 
 #トピック分類した結果を表示
