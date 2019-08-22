@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+<title>k-means</title>
+</head>
+<body class="ja">
+
+<div id="kmeans" style="height: 800px; width:800px;">
+<div><svg style="height: 800px; width: 800px; padding: 10px; background: rgb(34, 51, 68); cursor: pointer; user-select: none;"><g></g></svg></div>
+<div><button id="step" style="padding: 0.5em 0.8em;">STEP</button> <button id="restart" style="padding: 0.5em 0.8em;">RESTART</button></div>
+<fieldset style="display: inline; margin: .8em 0 1em 0; border: 1px solid #999; padding: .5em">
+<div><label for="N" style="display: inline-block; width: 15em;">n (ノード数):</label><input type="number" id="N" min="2" max="1000" value="100"></div>
+<div><label for="K" style="display: inline-block; width: 15em;">k (クラスター数):</label><input type="number" id="K" min="2" max="50" value="5"></div>
+<div><button id="reset" style="padding: 0.5em 0.8em;">新規</button></div>
+</fieldset>
+</div>
+
+<script src="./d3.v3.min.js" charset="utf-8"></script>
+
+<script src="./k-means.js"></script>
+
+</body></html>
